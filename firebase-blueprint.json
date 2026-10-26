@@ -1,0 +1,135 @@
+{
+  "entities": {
+    "Setting": {
+      "title": "Setting",
+      "description": "School and election administrative settings",
+      "type": "object",
+      "properties": {
+        "schoolName": { "type": "string" },
+        "academicYear": { "type": "string" },
+        "electionName": { "type": "string" },
+        "slogan": { "type": "string" },
+        "committeeContact": { "type": "string" },
+        "committeePhone": { "type": "string" },
+        "committeeChair": { "type": "string" },
+        "principal": { "type": "string" }
+      },
+      "required": ["schoolName", "academicYear"]
+    },
+    "Election": {
+      "title": "Election",
+      "description": "Status and timeline of the OSIS election",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "academicYear": { "type": "string" },
+        "status": { "type": "string", "enum": ["upcoming", "ongoing", "completed"] },
+        "startDate": { "type": "string" },
+        "endDate": { "type": "string" }
+      },
+      "required": ["id", "title", "status"]
+    },
+    "ClassItem": {
+      "title": "ClassItem",
+      "description": "Registered class grade and section",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "className": { "type": "string" },
+        "grade": { "type": "number" }
+      },
+      "required": ["id", "className", "grade"]
+    },
+    "Candidate": {
+      "title": "Candidate",
+      "description": "Candidate pair running for OSIS leadership",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "candidateNumber": { "type": "number" },
+        "chairmanName": { "type": "string" },
+        "viceChairmanName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "vision": { "type": "string" },
+        "mission": { "type": "array" },
+        "programs": { "type": "array" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["id", "candidateNumber", "chairmanName", "viceChairmanName"]
+    },
+    "Voter": {
+      "title": "Voter",
+      "description": "Registered student voter in the DPT",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "nisn": { "type": "string" },
+        "name": { "type": "string" },
+        "className": { "type": "string" },
+        "tokenPin": { "type": "string" },
+        "hasVoted": { "type": "boolean" },
+        "votedAt": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] }
+      },
+      "required": ["id", "nisn", "name", "className", "hasVoted"]
+    },
+    "Vote": {
+      "title": "Vote",
+      "description": "Anonymous official cast ballot",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "voterId": { "type": "string" },
+        "candidateId": { "type": "string" },
+        "electionId": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "voterId", "candidateId", "electionId", "createdAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System and administrative action audit record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "action": { "type": "string" },
+        "description": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "action", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingId}": {
+      "schema": "Setting",
+      "description": "School election configuration"
+    },
+    "/elections/{electionId}": {
+      "schema": "Election",
+      "description": "Active election configuration and status"
+    },
+    "/classes/{classId}": {
+      "schema": "ClassItem",
+      "description": "List of student classes"
+    },
+    "/candidates/{candidateId}": {
+      "schema": "Candidate",
+      "description": "List of official candidate pairs"
+    },
+    "/voters/{voterId}": {
+      "schema": "Voter",
+      "description": "Permanent Voter List (DPT) records"
+    },
+    "/votes/{voteId}": {
+      "schema": "Vote",
+      "description": "Official cast ballot records"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Election operational audit trails"
+    }
+  }
+}

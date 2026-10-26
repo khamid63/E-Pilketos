@@ -1,0 +1,8 @@
+{
+  "name": "Remix E-Pilketos SMP Negeri 1 Tembarak",
+  "description": "Aplikasi Elektronik Pemilihan Ketua dan Wakil Ketua OSIS SMP Negeri 1 Tembarak Tahun Pelajaran 2026/2027 dengan sistem voting aman, real-time statistik, dan berita acara resmi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
